@@ -8,42 +8,43 @@ using Microsoft.Extensions.Logging;
 
 namespace gestion_transaction.Controllers
 {
-    [ApiController]
-    [Route("/")]
-    public class GestionTransactionController : ControllerBase
+  [ApiController]
+  [Route("/")]
+  public class GestionTransactionController : ControllerBase
+  {
+
+    private readonly ILogger<GestionTransactionController> _logger;
+
+    public GestionTransactionController(ILogger<GestionTransactionController> logger)
+    {
+      _logger = logger;
+    }
+
+    [HttpGet]
+    public IActionResult Get()
+    {
+      return Ok("Gestion Transaction v0.1.1");
+    }
+
+    [HttpPost]
+    public String Post(String transaction)
     {
 
-        private readonly ILogger<GestionTransactionController> _logger;
+      _logger.LogInformation("NOUVELLE TRANSACTION: " + transaction);
+      _logger.LogInformation("DEBUT GESTION TRANSACTION: " + transaction);
 
-        public GestionTransactionController(ILogger<GestionTransactionController> logger)
-        {
-            _logger = logger;
-        }
+      Thread.Sleep(8000);
 
-        [HttpGet]
-        public IActionResult Get()
-        {
-            return Ok("Gestion Transaction v0.1");
-        }
+      _logger.LogInformation("SUCCESS GESTION TRANSACTION: " + transaction);
 
-        [HttpPost]
-        public String Post(String transaction) {
-            
-            _logger.LogInformation("NOUVELLE TRANSACTION: " + transaction);
-            _logger.LogInformation("DEBUT GESTION TRANSACTION: " + transaction);
-
-            Thread.Sleep(8000);
-            
-            _logger.LogInformation("SUCCESS GESTION TRANSACTION: " + transaction);
-
-            return transaction;
-        }
-
-        [HttpGet]
-        [Route("/healtz")]
-        public IActionResult GetHealtz()
-        {
-            return Ok();
-        }
+      return transaction;
     }
+
+    [HttpGet]
+    [Route("/healtz")]
+    public IActionResult GetHealtz()
+    {
+      return Ok();
+    }
+  }
 }
