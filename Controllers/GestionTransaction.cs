@@ -23,7 +23,7 @@ namespace gestion_transaction.Controllers
     [HttpGet]
     public IActionResult Get()
     {
-      return Ok("Gestion Transaction v0.1.4");
+      return Ok("Gestion Transaction v0.1.5");
     }
 
     [HttpPost]
