@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,21 +24,27 @@ namespace gestion_transaction.Controllers
     [HttpGet]
     public IActionResult Get()
     {
-      return Ok("Gestion Transaction v0.1.5");
+        return Ok("Gestion Transaction v0.1.5");
     }
 
     [HttpPost]
-    public String Post(String transaction)
+    public async Task<IActionResult> Post()
     {
+    
+        using (var reader = new StreamReader(Request.Body))
+        {
+            var transaction = await reader.ReadToEndAsync();
 
-      _logger.LogInformation("NOUVELLE TRANSACTION: " + transaction);
-      _logger.LogInformation("DEBUT GESTION TRANSACTION: " + transaction);
+            _logger.LogInformation("NOUVELLE TRANSACTION: " + transaction);
+            _logger.LogInformation("DEBUT GESTION TRANSACTION: " + transaction);
 
-      Thread.Sleep(8000);
+            Thread.Sleep(8000);
 
-      _logger.LogInformation("SUCCESS GESTION TRANSACTION: " + transaction);
+            _logger.LogInformation("SUCCESS GESTION TRANSACTION: " + transaction);
 
-      return transaction;
+        }
+
+        return Ok();
     }
 
     [HttpGet]
