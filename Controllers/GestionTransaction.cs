@@ -24,7 +24,7 @@ namespace gestion_transaction.Controllers
     [HttpGet]
     public IActionResult Get()
     {
-        return Ok("Transaction management v2");
+        return Ok("Transaction management v2.2");
     }
 
     [HttpPost]
